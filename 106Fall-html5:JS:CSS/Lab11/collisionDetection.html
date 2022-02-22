@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>Simple Collision Detection</title>
+
+    <!-- link in style sheets -->
+    <link href="css/collisionDetection.css" type="text/css" rel="stylesheet" />
+      
+    <!-- include JS scripts -->
+	<script src="js/modernizr.js"></script>
+	<script src="js/collisionDetection.js"></script>
+
+</head>
+
+<body>
+    
+    <h1 class="center-text font-Orbitron">Collision Detection Lab</h1>
+    <h4 class="center-text font-Special-Elite">
+        <a href="Lab11-Notes.pdf" target="_blank">Lab Notes</a>
+         | 
+        <a href="collisionDetectionNotes.txt" target="_blank">Collision Notes</a>
+    </h4>
+    
+    <!-- Canvas -->
+    <canvas id="myCanvas" width="600" height="400" class="center-block">
+        Your browser doesn't support Canvas.
+    </canvas>    
+    <!-- ^ End Canvas -->
+    
+    <!-- Controls -->
+    <br><br>
+    <div id="canvasControls">
+    </div>
+    <!-- ^ End Controls -->
+
+    <!-- Font Fix Section -->
+    <!-- We need to use each font on the page to use it on the canvas -->
+    <div id="fontFix">
+        <p class="font-Orbitron">Orbitron</p>
+        <p class="font-Special-Elite">Special Elite</p>
+    </div>
+    <!-- ^ End FontFix -->
+
+</body>
+</html>

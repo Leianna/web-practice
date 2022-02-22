@@ -1,0 +1,247 @@
+Canvas Bouncy Bounce Lab - Notes v 4.0 - 4.1.18
+
+---------------------------------------------------------------------------
+1.0  Canvas Bounce Project Folder
+---------------------------------------------------------------------------
+
+This is an example project folder for getting an circle to bounce.
+
+    canvas-bounce.html 
+    css/canvas-bounce.css  
+    js/canvas-bounce.js 
+
+
+1.1  Canvas Resources
+---------------------------------------------------------------------------
+
+Here are some resources to help with canvas:
+
+References:
+
+    http://www.w3schools.com/tags/ref_canvas.asp
+
+Tutorials:
+
+    http://www.w3schools.com/canvas/
+
+    https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial
+
+
+---------------------------------------------------------------------------
+2.0  More on this Example
+---------------------------------------------------------------------------
+
+Note this example is purposefully very simple.  You assignments are expected to be much more robust.
+
+2.1 The HTML
+---------------------------------------------------------------------------
+
+This page has:
+
+    * HTML background image
+    * Canvas centered on the page with a top margin
+    * Canvas tag using shadows
+    * A hidden fontFix div to use fonts on the canvas
+
+The HTML is super simple - <canvas> tag with and ID and a CLASS.
+
+2.2 The CSS
+---------------------------------------------------------------------------
+
+The CSS is also very straight forward.
+
+    * Font:
+    - import a font
+
+    * Body:
+    - use a bg color that covers the whole page
+
+    * Canvas:
+    - add a simple 1px border to frame the canvas
+    - add a top margin to help present the canvas
+    - add a shadow for presentation
+
+    * Font Fix for Canvas:
+    - setup an ID to use fonts
+    - setup a few helper classes to use the fonts
+
+    * Utility class:
+    - center text
+    - center objects
+
+2.3 The JS
+---------------------------------------------------------------------------
+
+Has all the standard setup code to call our canvasApp().
+
+---------------------------------------------------------------------------
+3.0 canvasApp()
+---------------------------------------------------------------------------
+
+The canvasApp() has the following basic algorithm
+
+    (0) define a utility function to generate a random number with in a range   
+    - getRandom( min, max )
+
+    (1) set up canvas variables
+
+    (2) set up circle control variables
+    - position
+    - size
+    - color
+    - movement
+
+    (3) define a function to move the circle
+    - move to next location
+    - check for X and Y axis boundaries
+        - change direction 
+        - reset location
+
+    (4) define a function to draw the circle
+        - change direction 
+        - reset location
+
+    (5) draw the canvas at a set interval
+
+3.1 canvasApp() - (1) set up canvas variables
+---------------------------------------------------------------------------
+
+Standard stuff.
+
+
+3.2 The Circle
+---------------------------------------------------------------------------
+
+(A) We want to setup the variables that define our circle:
+
+    - position x, y
+    - size
+    - color
+    - movement (speed)
+
+Setup control variables
+
+    //size of the circle
+    var circleSize = 25;
+    
+    //movement of circle
+    var circleSpeed = 10;
+
+    //color of the circle
+    var red = getRandom( 0, 255 );
+    var green = getRandom( 0, 255 );
+    var blue = getRandom( 0, 255 );
+    var opacity = 1;
+    var circleColor = "rgba(" + red + "," + green + "," + blue + "," + opacity + ")";
+
+
+3.3 Draw the Circle
+---------------------------------------------------------------------------
+
+Define our drawCircle() function to:
+
+    - open path
+    - draw the arc
+        - X , Y
+        - Radius
+        - Angle:  0, Math.PI() * 2
+    - set a fill style
+    - close the path
+    - stroke
+
+---------------------------------------------------------------------------
+4.0 Lab 
+---------------------------------------------------------------------------
+
+4.1 Move Circle
+---------------------------------------------------------------------------
+
+Setup parameters to move the circle
+
+    - need a control variable 
+
+        var circleSpeed = 10;
+
+    and then need to values to move the circle object
+
+        //movement of the circle
+        moveX: circleSpeed,
+        moveY: circleSpeed
+
+
+Also, to get the circle to move we need to ... draw the circle lots of time.
+
+To do this use the setInterval()
+
+    - See:  https://www.w3schools.com/jsref/met_win_setinterval.asp
+
+For us this means we need to set an interval for how often to call our drawCanvas() function.
+
+    //-----------------------------------------------------------
+    // draw the canvas at a specific interval 
+    var interval = 50;
+    setInterval( drawCanvas, interval );    
+
+Tricky!
+
+But now the circle moves off the canvas.  Oh no!  Would be cool if we could get it bounce.
+
+
+4.2 "Bounce" the Circle
+---------------------------------------------------------------------------
+
+Setup a moveCircle() function to:
+
+    - move the circle to the next location
+        - change the circles x and y by the movement parameter
+
+    - check for that circle has not crossed the X axis boundaries
+        - change the X direction 
+        - reset location
+
+    - check for that circle has not crossed the Y axis boundaries
+        - change Y direction 
+        - reset location
+
+
+You check the boundaries just like you did in the previouse move movement lab with the circle.  Except that when you encounter a boundary you "change direction".
+
+We be bouncing!
+
+4.3  Randomize the Circle
+---------------------------------------------------------------------------
+
+Lets make this more exciting.
+
+We can randomize all of the variables of the circle
+
+    - starting X and Y
+    - size
+    - color including opacity
+    - movement
+
+To do this we know we can use our getRandom(min, max) function to return a value between min..max.  
+
+    - For X and Y we would want to bounce to the canvas width and height
+    - for size we would want to bound to some "minSize" and "maxSize"
+    - for color we would want to bound to the max limit of each color or 255
+    - for movement we would want to bound to some "minSpeed" or "maxSpeed"
+
+Go ahead and randomize all these components.  Here is an example to generate a random size that is bound by a max size
+
+    //movement of circle
+    var minSpeed = 1;
+    var maxSpeed = 50;
+    var circleSpeed = getRandom( minSpeed, maxSpeed );
+
+4.4  Add Something
+---------------------------------------------------------------------------
+
+What else can you do?  Other things to randomize?  Other things you can add?
+
+
+
+
+
+
+

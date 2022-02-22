@@ -1,0 +1,279 @@
+Canvas Poster Notes V3.1 10.3.18
+
+---------------------------------------------------------------------------
+1.0  Canvas Poster Project Folder
+---------------------------------------------------------------------------
+
+This is our template project folder for starting our Canvas Poster project.
+
+canvas-poster.html - has the basic setup of a canvas on a page.
+
+css/canvas-poster.css - has some simple rules to set fonts; and to put a Shadow border around our canvas and center it.
+
+js/canvas-poster.js - this is the starting JS code we need to use Canvas.  It uses the moderizer.js.  
+
+This js example also:
+
+    * shows how to load a background image and then:
+      * shows how to write text with a font
+      * shows how to add other images on top of the background image
+    * shows how to use the .shadowBlur() and .shadowColor() around text and images 
+
+1.1  Canvas Resources
+---------------------------------------------------------------------------
+
+Here are some resources to help with canvas:
+
+References:
+
+    http://www.w3schools.com/tags/ref_canvas.asp
+
+
+Tutorials:
+
+    http://www.w3schools.com/canvas/
+
+    https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial
+    
+    
+Specific Resources for Arrays:
+
+    Module 6 - https://www.sololearn.com/Course/JavaScript/
+
+    http://www.w3schools.com/js/js_arrays.asp
+    
+    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array
+
+
+Specific Resources Canvas shadowing:
+
+    https://www.w3schools.com/tags/canvas_shadowblur.asp
+
+Specific Resources for CSS box shadowing:
+
+    https://www.w3schools.com/cssref/css3_pr_box-shadow.asp
+
+---------------------------------------------------------------------------
+2.0  More on this Example
+---------------------------------------------------------------------------
+
+Note this example is purposefully very simple.  
+
+You assignments are expected to be MUCH MORE ROBUST.
+
+
+2.1 The HTML
+---------------------------------------------------------------------------
+
+This page has:
+
+    * HTML background image
+    * Canvas centered in on the page with a top margin
+    * Canvas tag using shadows
+    * A hidden fontFix div to use fonts on the canvas
+
+The HTML is super simple - <canvas> tag with and ID and a CLASS.
+
+
+2.2 The CSS
+---------------------------------------------------------------------------
+
+The CSS is also very straight forward.
+
+    * Font:
+    - import a font
+
+    * Body:
+    - use a bg image that covers the whole page
+
+    * Canvas:
+    - add a simple 1px border to frame the canvas
+    - add a top margin to help present the canvas
+    - add a shadow for presentation
+
+    * Font Fix for Canvas:
+    - setup an ID to use fonts
+    - setup a few helper classes to use the fonts
+
+    * Utility class:
+    - center text
+    - center objects
+
+
+2.3 Using fonts on the Canvas 
+---------------------------------------------------------------------------
+
+In order to use non-standard fonts on our canvas element we need to use them on the HTML page first.
+
+But often we may not actually have any text on our posters in HTML, or want to or need to use the fonts we use on the canvas on the HTML page.
+
+So to accommodate the requirement for all fonts needing to be on the HTML page to use them on the canvas we setup a that then uses the fonts; and we toll the HTML page to hide that div.
+
+In the CSS:
+
+(1) import the fonts
+
+@import url(https://fonts.googleapis.com/css?family=Orbitron);
+@import url(https://fonts.googleapis.com/css?family=Special+Elite);
+
+(2) setup classes so they can be used in HTML
+
+.font-Orbitron {
+    font-family: 'Orbitron', sans-serif; 
+}
+
+.font-Special-Elite {
+    font-family: 'Special Elite'; 
+}
+
+In the HTML:
+
+(1) setup a div that then uses the fonts in p tags with an ID
+
+<div id="fontFix">
+    <p class="font-Orbitron">Orbitron</p>
+    <p class="font-Special-Elite">Special Elite</p>
+</div>
+
+Go back to the CSS and set the visibility attribute to hide this div ID:
+
+#fontFix {
+    visibility: hidden;    /* hide this section */
+}
+
+
+---------------------------------------------------------------------------
+3.0 The JS 
+---------------------------------------------------------------------------
+
+Has all the standard setup code to call our canvasApp().
+
+The primary elements of the poster:
+
+    * image to use as a background to cover the whole canvas
+    * 3 supporting images placed around the canvas
+    * a text section at the top
+    * a text section at the bottom
+
+
+3.1 canvasApp()
+---------------------------------------------------------------------------
+
+The canvasApp() has the following basic algorithm:
+
+    (1) set up canvas variables
+
+    (2) set up image variables
+
+    (3) a utility function to load all the images
+
+    (4) a drawPoster() function to draw all the elements on the poster
+
+    (5) call the load all images utility function which after all the images are loaded then calls the drawPoster() function 
+
+
+3.2 canvasApp() - (1) set up canvas variables
+---------------------------------------------------------------------------
+
+Standard stuff.
+
+
+3.3 canvasApp() - (2) set up image variables
+---------------------------------------------------------------------------
+
+In this example we use arrays[] for both the sets of image classes and image sources.
+
+    * declare an array to that will hold all the image objects
+    * declare and populate an array with the image sources
+
+    // -----------------------------------------------------
+    // Setup Images
+    // declare an array for image objects
+    var images = [];
+
+    // assign our image sources
+    var imageSources = [
+        "./images/backgroundImage.jpg",
+        "./images/characterImage1.jpg",
+        "./images/characterImage2.jpg",
+        "./images/characterImage3.jpg"
+    ]; //imageSource    
+
+Note if you have your images in a images sub-folder then define your image location as:
+
+    "./images/IMAGENAME.EXT"
+
+not 
+
+    "../images..."
+
+
+3.4 canvasApp() - (3) loadImages() Utility Function
+---------------------------------------------------------------------------
+
+The loadImages() utility function accepts: 
+
+    * the array that will hold the image objects
+    * an array that is populated with the image source definitions
+
+This utility function then:
+
+    * determines how many images it needs to create by looping through the image source array
+    * then for each image source it:
+        - creates an image object
+        - assigns the image source 
+        - loads the image (using the callback)
+   
+
+3.5 canvasApp() - (4) drawPoster()
+---------------------------------------------------------------------------
+
+The drawPoster() function simply draws all the elements on the canvas in the specific order we want (know that we all the images have been loaded).
+
+
+===========================================================================
+Lab 6 : Canvas Poster
+
+In this assignment you will use HTML, CSS, JavaScript, and the <canvas> element to create a web-based poster. 
+
+Instructions:
+
+Design and implement (using HTML5, Canvas, JavaScript, and CSS) a browser-based poster advertising a location or event you would like to visit or attend:
+- The location or event may be from the past, present, or future.
+- The location or event may be fictional or real.
+- If the location or event is fictional, it should be your own creation.
+
+Your poster should include the following, implemented using the canvas and JavaScript:
+- Text
+- Images
+- Filled shapes
+- Borders
+- Shading (blur)
+
+Pay close attention to the design and visual style of your poster. It is not enough to prove you can use the HTML5 canvas. You must also produce a work of art that creates a great visual experience for users.
+
+Suggested Development Process:
+
+- Brainstorm your ideas
+- Sketch out on paper the layout
+- Identify the various components of your design - images, text, treatments
+- Determine the dimensions of these components.
+- Starting with a copy of the Canvas Template project folder, begin to build your project.
+
+Getting Started and Resources:
+
+Download the starter project canvasPoster.zip from the Resources - > Lab6-CanvasPoster folder on Sakai.
+
+Use the example project canvasPosterExample.zip from the Resources - > Examples folder on Sakai.
+
+Grading - You will be scored on the following:
+
+Valid HTML and CSS that conforms to best practices (5)
+Valid Canvas-based JavaScript that conforms to best practices (10)
+Creativity and elegance in terms of technical implementation and visuals (20)
+Attention to detail in your writing (e.g. no typos, appealing formatting, proper grammar, etc.) (5)
+
+Submission:
+
+Upload and test your project on the course server. Submit a link to your uploaded project.
+

@@ -1,0 +1,405 @@
+Canvas Primitives Notes  v3.1 9.30.18
+
+---------------------------------------------------------------------------
+1.0  Canvas Primitives Project Folder
+---------------------------------------------------------------------------
+
+This is our project folder for starting to draw some basic elements on a canvas.  And your Canvas:  Drawing Primitives homework assignment lab.
+
+1.1  Resources
+---------------------------------------------------------------------------
+
+Video Tutorial:
+
+https://www.lynda.com/HTML-tutorials/Introducing-Canvas-tag/80782/85043-4.html
+
+    - Section 3: Intro to Canvas Element
+    - Section 4: Understanding the Canvas Element and 2D Drawing   
+    - Section 5: Basic Canvas Drawing Techniques
+
+W3Schools Tutorial:
+
+    https://www.w3schools.com/html/html5_canvas.asp
+
+W3schools Reference:
+
+    http://www.w3schools.com/tags/ref_canvas.asp
+
+---------------------------------------------------------------------------
+2.0  Drawing Primitives 
+---------------------------------------------------------------------------
+
+We can draw - lines; shapes; text and images on the canvas.  Lets explore how to do this.
+
+2.1  Shapes - Lines
+---------------------------------------------------------------------------
+
+A.  Draw a Line
+---------------------------
+Google:     "canvas draw line"
+Resource:   https://www.w3schools.com/tags/canvas_lineto.asp
+
+Need a path; a starting point and an end point.
+
+    // Line 
+    // -------------------------------------------
+    // draw line that bisects the canvas
+    
+    //start the path
+    ctx.beginPath();
+
+A starting point and end point.
+
+    //define the start and end points of the line
+    ctx.moveTo( 0, 0 );
+    ctx.lineTo( 400, 400 );
+
+Tell canvas to draw the line:
+
+    //close path and stroke
+    ctx.closePath();
+    ctx.stroke();
+
+B.  Style the Line - Width
+---------------------------
+Google:     "canvas line width"
+Resource:   https://www.w3schools.com/tags/canvas_linewidth.asp
+
+Now lets stylize the line.
+
+We can set a width for the line.
+
+    //set line width
+    ctx.lineWidth = 10;
+      
+C.  Style the Line - Color
+---------------------------
+Google:     "canvas line color"
+Resource:   https://www.w3schools.com/tags/canvas_strokestyle.asp
+
+Set a color for the line
+
+    // set line color
+    ctx.strokeStyle = '#3F7CAC';
+
+
+2.2  Shapes - Rectangles
+---------------------------------------------------------------------------
+
+Lets draw some rectangles
+
+A.  Draw a Rectangle
+---------------------------
+Google:  "canvas draw rectangle"
+Resource:  https://www.w3schools.com/tags/canvas_rect.asp
+
+
+To draw shapes we need to first start a path to draw.  
+
+    // Rectangle
+    //---------------------------------------------
+
+    //define a rectangle border
+    ctx.beginPath();
+
+And then define the area that we want the rectangle to occupy on the canvas:
+
+    //define the rectangle
+    ctx.rect( 100, 100, 200, 200);
+    
+And then...draw:
+
+    //close path and stroke
+    ctx.closePath();
+    ctx.stroke();
+
+
+B.  Fill in the Rectangle Color
+-------------------------------
+Google:  "canvas fill color"
+Resource:  https://www.w3schools.com/tags/canvas_fill.asp
+
+You can also "fill" a rectangle with a color.
+
+    ctx.fillRect( 100, 100, 200, 200 );
+
+And then define a color or "fill" for the rectangle:
+
+    ctx.fillStyle = "#BDC4A7";
+        
+
+2.3  Shapes - Circles
+---------------------------------------------------------------------------
+Google:  "canvas draw circle"
+Resource:  https://www.w3schools.com/tags/canvas_arc.asp
+
+Very similar to rectangles.
+
+Start the path:
+
+    // Circle 
+    // -----------------------------------------
+
+    //start the path
+    ctx.beginPath(); 
+        
+Define the circle as an arc:
+
+    //define a circle as an arc
+    ctx.arc( 200, 50, 40, 0, 2*Math.PI );
+
+And then...draw:
+
+    //close path and stroke
+    ctx.closePath();
+    ctx.stroke();
+
+Style the circle:
+
+    //set line width
+    ctx.lineWidth = 5;
+    
+    //set the color
+    ctx.strokeStyle = '#95AFBA';
+    
+    //fill the circle
+    ctx.fillStyle = 'green';
+    ctx.fill();    
+
+2.4  Text
+---------------------------------------------------------------------------
+Google:  "canvas text"
+Resource:  https://www.w3schools.com/graphics/canvas_text.asp
+
+We can write text to the canvas.
+
+    //Text 
+    // -------------------------------------------
+
+    //write text
+    ctx.fillText( 'Hello COMP 106!', 60, 390 );
+    
+    //stroke text
+    ctx.strokeText( 'Hello COMP 106!', 60, 200 );
+
+
+Set a line width:
+    
+    //set line width
+    ctx.lineWidth = 1;
+
+Set a font:
+
+    //set font
+    ctx.font = '28pt "Comic Sans MS", cursive, sans-serif';
+
+Set a color:
+
+    // stroke color
+    ctx.strokeStyle = "#56638A";
+
+
+For text we need a font; a line width; a color and then write some text;
+
+    // Text 
+    // -------------------------------------------
+    // Write Text
+    
+    //font
+    ctx.font = '28pt "Comic Sans MS", cursive, sans-serif';
+
+    //line width
+    ctx.lineWidth = 1;
+
+    // stroke color
+    ctx.strokeStyle = "#56638A";
+
+    //write text
+    ctx.strokeText('Hello COMP 106!', 60, 200);
+
+
+2.5  Images
+---------------------------------------------------------------------------
+Google:     "canvas images"
+Resource:   https://www.w3schools.com/graphics/canvas_images.asp
+
+
+To add an image we need to create a variable to hold the image object:
+
+    // Image 
+    // -----------------------------------------
+    var imageObj = new Image();
+    
+And then we need to provide a source for the image that is to be drawn:
+    
+    imageObj.src = 'http://blogs.syrinx.com/wp-content/uploads/sites/72/2012/03/bender.jpg';
+    
+Then we need to draw the image.  But we need to be sure that the page has loaded before we try and draw the image:
+
+    //when the image has loaded
+    imageObj.onload = function() {
+        //draw the image
+        ctx.drawImage(imageObj, 100, 100, 200, 200);
+    };
+    
+We also need to set location and size of the image on the canvas:
+
+Finished Code:
+
+    // Image 
+    // -----------------------------------------
+    
+    //create a variable for the image
+    var imageObj = new Image();
+
+    //set the src of the image
+    imageObj.src = 'https://cdn.instructables.com/FQR/5XCC/FXK6CTLA/FQR5XCCFXK6CTLA.LARGE.jpg';
+
+    //when the image has loaded
+    imageObj.onload = function() {
+        //draw the image
+        ctx.drawImage(imageObj, 100, 100, 200, 200);
+    };
+    
+
+
+---------------------------------------------------------------------------
+3.0  My Finished Example Code
+---------------------------------------------------------------------------
+
+    // Line 
+    // -------------------------------------------
+    // draw line that bisects the canvas
+    
+    // start the path
+    ctx.beginPath();
+    
+    // set line width
+    ctx.lineWidth = 10;
+    // set line color
+    ctx.strokeStyle = '#3F7CAC';
+    
+    // define the start and end points of the line
+    ctx.moveTo(0,0);
+    ctx.lineTo(400,400);
+        
+    // define the start and end points of the line
+    ctx.moveTo(400,0);
+    ctx.lineTo(0,400);
+    
+    // close path and stroke
+    ctx.closePath();
+    ctx.stroke();
+    
+    // Rectangle 
+    // ---------------------------------------------
+
+    // define a rectangle border
+    ctx.beginPath();
+
+    // define the rectangle
+    ctx.rect(100,100,200,200);
+    ctx.fillStyle = "#BDC4A7";
+    ctx.fillRect(100,100,200,200);
+    
+    // close path and stroke
+    ctx.closePath();
+    ctx.stroke();
+
+    // Circle 
+    //-----------------------------------------
+
+    // start the path
+    ctx.beginPath();     
+    
+    ctx.arc(200,50,40,0,2*Math.PI);
+    
+    // fill the circle
+    ctx.fill();    
+
+    // close path and stroke
+    ctx.closePath();
+    ctx.stroke();
+    
+    // Text 
+    // -------------------------------------------
+
+    // set line width
+    ctx.lineWidth = 1;
+    
+    // set font
+    ctx.font = '28pt "Comic Sans MS", cursive, sans-serif';
+    
+    // stroke color
+    ctx.strokeStyle = "#56638A";
+    
+    // write text
+    ctx.fillText('Hello COMP 106!', 60, 390);
+    
+    // Image 
+    // -----------------------------------------
+    
+    // create a variable for the image
+    var imageObj1 = new Image();
+
+    // set the src of the image
+    imageObj1.src = 'https://cdn.instructables.com/FQR/5XCC/FXK6CTLA/FQR5XCCFXK6CTLA.LARGE.jpg';
+
+    // when the image has loaded
+    imageObj1.onload = function() {
+        //draw the image
+        ctx.drawImage(imageObj1, 100, 100, 200, 200);
+    };
+
+
+---------------------------------------------------------------------------
+4.0 Your Next Assignment -  Canvas:  Drawing Primitives 
+---------------------------------------------------------------------------
+
+Lab: Canvas:  Drawing Primitives 
+--------------------------------
+
+In this lab you will get started working with the primitive canvas drawing methods.
+
+Draw lines, shapes, write text, display an image.  And use the color and style elements to fill and style your shapes and text:  line styles; stroke text; shadows; 
+
+    Draw Lines
+    Draw Text
+    Draw Rectangles
+    Draw Circles
+    Draw Images
+    Add colors
+    Use fonts
+
+Resources:
+--------------------------------
+
+(1) Follow this video tutorial on Lynda:
+
+https://www.lynda.com/HTML-tutorials/Introducing-Canvas-tag/80782/85043-4.html
+
+Watch at least these section 1-5.
+
+(2) The notes from the Canvas-Primitives-Example example project.
+  
+(3) The W3schools Reference details how to use the canvas drawing methods and provides basic code snippets:
+
+    http://www.w3schools.com/tags/ref_canvas.asp
+
+
+Getting Started:
+--------------------------------
+
+Download the Canvas-Primitives-Start.zip from the Resources->Homework-> Canvas Drawing Primitives folder.  
+
+Grading: You will be scored on the following
+
+    Valid HTML that conforms to best practices
+    Valid JavaScript that conforms to best practices
+    Valid CSS that conforms to best practices
+    Valid and proper use of the Canvas primitive drawing methods for lines, shapes, text and images
+
+Don’t be afraid to go beyond the basic requirements of the assignment if you wish!
+
+Your assignment MUST be significantly different from the example we did in class.
+

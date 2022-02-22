@@ -1,0 +1,395 @@
+CSS Style Rule Examples v2.2 9.9.18
+
+----------------------------------------------------------
+1.0  Using CSS on our Pages
+----------------------------------------------------------
+
+In our projects we will want to use some simple CSS to make our projects more visually appealing with:
+
+	Fonts
+	Colors for text and backgrounds
+	Centering Text
+	Centering Images
+    Centering Video 
+	Centering Groups of Content
+	Background Images
+
+Resources:
+
+    * SoloLearn Tutorial - http://www.sololearn.com/Course/CSS/ 
+    - Modules 1-4
+    
+    * Udacity Tutorial - https://www.udacity.com/course/intro-to-html-and-css--ud001
+    - Lesson 3-4
+
+    * W3chools CSS Tutorial - http://www.w3schools.com/css/default.asp - and its many examples and other references
+
+You will, and should, use all of these.  And a few others.
+
+
+1.1  How to Use External CSS 
+----------------------------------------------------------
+
+We place our CSS rules in a separate file and link that file to our HTML files.
+
+    <head>
+        ...
+        <link rel="stylesheet" type="text/css" href=“css/style.css”>
+    </head>
+
+
+1.2  CSS Rule Set Syntax
+----------------------------------------------------------
+
+In CSS we create "rule sets".  These rule sets are associated with "selectors".
+
+
+        tag       {   color:      yellow; }  
+      SELECTOR       PROPERTY      VALUE    
+
+
+    <selector> {
+        <property>:  <value>;
+        <property>:  <value>;
+    }
+
+"selectors" can be <tags> or "classes" or "id's"
+
+Here is an example:
+
+p {
+    color: red;
+    text-align: center;
+}
+
+The part inside the curly braces is the declaration.
+
+The keyword color is a property, and red is a value.
+
+The semicolon after the property-value pair separates it from other property-value pairs in the same declaration.  Do not forget to add this at the end of each rule.
+
+
+1.3  CSS References
+----------------------------------------------------------
+
+Here is a resource that provides a list of all the properties:
+
+    	http://www.w3schools.com/cssreF/default.asp 
+    
+        Selectors -> http://www.w3schools.com/cssreF/css_selectors.asp
+        
+        Web Safe Fonts -> http://www.w3schools.com/cssreF/css_websafe_fonts.asp
+        
+        Colors -> http://www.w3schools.com/cssreF/css_colors.asp
+        (also see --> http://www.w3schools.com/colors/default.asp)
+
+----------------------------------------------------------
+2.0  Getting Started with CSS
+----------------------------------------------------------
+
+We have already done some very basic CSS.  Lets walk through some other examples to get us started.
+
+
+2.1  Color
+----------------------------------------------------------
+
+We can set colors for the background and the font color.
+
+Here is snippet to set a background color.
+
+body {
+    background-color: skyblue;
+}
+
+Here is snippet to set a font color.
+
+body {
+    color: skyblue;
+}
+
+A.  Setting color by NAME
+
+    background-color:  <colorname>;
+
+Example:
+
+    background-color:  white;
+
+Step through this to see how to choose a color
+
+    http://www.w3schools.com/colors/default.asp
+
+B.  Setting color by HEX value
+
+    background-color: #_ _ _ _ _ _
+
+This takes 6 hex values.  Hex values for from 0..F.
+
+The first 2 values _ _ are for how much Red to use.
+The second 2 values _ _ are for how much Green to use.
+The last 2 values _ _ are for how much Blue to use.
+
+Example:
+
+    background-color:  #ff0000;  /* red */
+    background-color:  #00ff00;  /* green */
+    background-color:  #0000ff;  /* blue */
+    background-color:  #ffffff;  /* white */
+    background-color:  #000000;  /* black */
+
+And there are millions of combinations - checkout this cool Color Selector tool:
+
+    https://coolors.co/
+
+C.  Setting color using rgb()
+
+    background-color:  rgb( ___ , ____ , ___ );
+
+Each of these values are from 0..255.
+
+The first value ____ is for how much Red to use.
+The second value ____ is for how much Green to use.
+The last value ____ is for how much Blue to use.
+
+Examples:
+
+    background-color:  rgb( 255, 0, 0);     /* red */    
+    background-color:  rgb( 0, 255, 0);     /* green */
+    background-color:  rgb( 0, 0, 255);     /* blue */
+    background-color:  rgb( 255, 255, 255); /* white */
+    background-color:  rgb( 255, 255, 255); /* black */
+
+D.  Setting saturation of color using rgba()
+
+There is a version of rgb() that is rgba() that accepts a 4th value.
+
+    background-color:  rgba( ___ , ____ , ___, ___ );
+
+Works just like rgb() but the 4th value has a range of 0..1
+
+Setting this value, changes the saturation or opacity of the color.
+
+A value of 1 means full saturation; a value of 0 means no saturation (void).
+
+We usually pick a value between 0..1 - like 0.5 to get 1/2 saturation.
+
+Examples:
+
+    background-color:  rgb( 255, 0, 0, 0.5);     /* red with 1/2 saturation */    
+
+
+2.2  Fonts
+----------------------------------------------------------
+
+There are built in fonts - see them here:
+
+    http://www.w3schools.com/cssref/css_websafe_fonts.asp
+
+There are also lots of other custom fonts available from google fonts - see here:
+
+    https://www.google.com/fonts/
+
+To use external fonts you need to do 2 things
+
+(1) import the font using the @import command
+(2) create a rule using the font-family property.
+
+Here is an example for the font "Roboto"
+
+A.  Import the font - Add this to the very top of your .css file.
+
+	@import url(https://fonts.googleapis.com/css?family=Roboto);
+
+B.  Apply the font - Add this to the body rule set:
+
+	body {
+	    font-family: 'Roboto', sans-serif;
+	}
+
+More on more font properties later:
+
+    http://www.w3schools.com/css/css_font.asp
+
+
+2.3 Simple Text and Color Changes
+----------------------------------------------------------
+
+Changing the color of text can help make our projects more appealing.
+
+A.  Lets add a few classes with rules for a few colors:
+
+/* -------------------------------------------------------------- */
+/* Font Color Rules */
+
+.red {
+    color: red;
+}
+
+.green {
+    color: green;
+}
+
+.blue {
+    color: blue;
+}
+
+.white {
+    color: white;
+}
+
+B.  Now lets use these rule sets in our HTML:
+
+Add:
+
+	class=“red”
+
+to a <p> tag like:
+
+	<p class=“red”>
+
+C.  Background color examples:
+
+/* -------------------------------------------------------------- */
+/* Background Color Rules */
+
+.bg-red {
+    background-color: rgba( 255, 0, 0, 1 );
+}
+
+.bg-green {
+    background-color: rgba( 0, 255, 0, 1 );
+}
+
+.bg-blue {
+    background-color: rgba( 0, 0, 255, 1 );
+}
+
+.bg-white {
+    background-color: rgba( 255, 255, 255, 1 );
+}
+
+.bg-black {
+    background-color: rgba( 0, 0, 0, 1 );
+}
+
+
+2.4 Text Styling
+----------------------------------------------------------
+
+We can create some simple rules to center text and objects (images)
+
+
+A.  Add this rule to the CSS
+
+/* -------------------------------------------------------------- */
+/* Alignment Rules */
+
+.center-text {
+        text-align: center;
+}
+
+
+B.  Now use these in the HTML
+
+To center text add:
+	
+	class=“center-text” 
+
+to <p> and <h1..6> tags
+
+C.  Other examples:
+
+/* --------------------------------- */
+/*  Text Transformation Rules */
+
+.text-upper {
+    text-transform: uppercase;
+}
+
+.text-underline {
+    text-decoration: underline;
+}
+
+Apply these to tags on your page. Using
+
+    class="text-upper"
+    
+    or
+    
+    class="text-underline"
+
+
+2.5 Centering Objects
+----------------------------------------------------------
+
+We can create some simple rules to center text and objects (images, video, audio)
+
+A.  Image alignment
+
+We often want to position images - on the left, in the center, and on the right.
+
+/* --------------------------------- */
+/* Image Alignment Rules */
+
+.align-left {
+    float: left;
+    margin-right:  5px;
+    padding: 5px;
+}
+
+.align-right {
+    float: right;
+    margin-right:  5px;
+    padding: 5px;
+}
+
+.align-center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 5px;
+}
+
+To center images, for example, add:
+
+    class=“align-center”
+
+to the <img> tag.
+
+
+B. And also we often want to center block elements (video embeds, audio)
+
+To do this add this rule to your CSS:
+
+/* --------------------------------- */
+/* Block Alignment Rules */
+
+.center-block {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+Now apply this to the HTML
+
+To center objects (video, audio) add:
+
+	class=“center-block”
+
+to the <iframe> or <audio> tags.
+
+
+2.6 Add a background image to the entire page
+----------------------------------------------------------
+
+A.  Add this to the body style rule:
+
+    /* background image for the page */
+    background: url("https://i.ytimg.com/vi/qWDmlFsIMHM/maxresdefault.jpg"), no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+
+But now all our text is gone!  Why?
+

@@ -1,0 +1,481 @@
+Lab 7 Mouse Events - Notes v3.1 10.14.18
+
+---------------------------------------------------------------------------
+1.0  Canvas Events Project Folder
+---------------------------------------------------------------------------
+
+This is an example project folder for understanding and using events.
+
+    canvas-events.html 
+    css/canvas-events.css 
+    js/canvas-events.js
+    canvas-events-notes.txt
+
+We will walk through setting up event handlers and experiment with events related to interactions from the Mouse, the Keyboard and HTML objects (buttons).
+
+1.1  Introduction to Events
+---------------------------------------------------------------------------
+
+The browser can capture multiple events:
+
+- mouse events:  location; in and out; click
+- keyboard events:  key press
+- object loading events
+- ....
+
+See:  http://www.w3schools.com/jsref/dom_obj_event.asp
+
+To capture these events, the browser allows us to listen for events by calling a function when an event occurs and passing the function an object for the event.
+
+See:  http://www.w3schools.com/jsref/met_document_addeventlistener.asp
+
+To handle events we need to add an event handler to our JS code:
+
+    object.addEventListener( event, myEventFunction, useCapture );
+
+And then also add an associated function() to be called when the event occurs.
+
+    function myEventFunction( e ) {
+
+        ...handling it...
+
+    }
+
+This function accepts the parameter "e" which the event object.  The event object provides us access to what occurred.
+
+
+1.2  Scaffolding for Events
+---------------------------------------------------------------------------
+
+The building block for events are:
+
+(1) What event are we listening for?
+
+(2) What object are we listening on?
+
+(3) What function are we going to call when the event occurs?
+
+It is good practice to setup the following basic scaffolding to ensure that your events are listened for, heard and action is taken. 
+
+Step 1: Add the event listener
+
+    //-----------------------------------------------------------
+    //event listeners
+    object.addEventListener( "event", eventFunction , true );    
+
+
+Step 2:  Setup the function that gets called
+
+    //-----------------------------------------------------------
+    //event handler function
+    function eventFunction( e ) {    
+
+        console.log( "eventFunction()" );
+        
+        //event specific code goes here
+        ....
+        
+    } //eventFunction()
+
+We can test that this works by activating the event and then checking the console to see of the eventFunction() has been called.
+
+Note, you need to define the "event" and the "object" in the addEventListener.
+
+1.3  Event Resources
+---------------------------------------------------------------------------
+
+Here are some resources to help with events:
+
+http://www.w3schools.com/jsref/dom_obj_event.asp
+
+http://www.w3schools.com/jsref/met_document_addeventlistener.asp
+
+http://www.w3schools.com/jsref/dom_obj_event.asp
+
+
+* For more on "Event Capture and Bubbling"  see:
+
+http://catcode.com/domcontent/events/capture.html
+http://stackoverflow.com/questions/4616694/what-is-event-bubbling-and-capturing
+
+
+---------------------------------------------------------------------------
+2.0  Mouse Events
+---------------------------------------------------------------------------
+
+To explore mouse events we going to use a simple example of drawing a single circle.  The circle has a specific size and color and is drawn in the center of the canvas.
+
+We will then explore how to:
+
+* have the circle move based on the mouse movement
+* have the circle change color when the mouse is clicked
+* have the circle change size when  clicked
+
+2.1  Setup 
+---------------------------------------------------------------------------
+
+On a cleared canvas draw a filled circle of a specific size in the center of the canvas.
+
+Our program is setup with the following:
+
+    canvasApp() {
+
+        - setup canvas variables
+        
+        - setup circle variables
+
+        function drawCircle() 
+            - draw a circle 
+
+        function clearCanvas() 
+            - clear the canvas
+
+        function drawCanvas() 
+            - draw the circle
+
+        - call drawCanvas()
+    
+    }
+
+2.2  Mouse Movement Event 
+---------------------------------------------------------------------------
+
+The first part is to see if we can:
+
+* Have the circle change location based on the movement of the mouse.
+
+OK to get started lets go through the building block for events:
+
+(1) what event are we listening for?
+
+Lets look and see what type of events are related to the mouse:
+
+    http://www.w3schools.com/jsref/dom_obj_event.asp
+
+Looks like we may be able to use  use "mousemove" as our event
+
+    http://www.w3schools.com/jsref/event_onmousemove.asp
+    
+Our event listener starts to look like:
+
+    object.addEventListener( "mousemove", eventFunction , true );    
+
+(2) What object are we listening on?
+
+When or where do we want the know when the mouse moves?  In other words, on which object or element do we want to know when the mouse moves?
+
+We are only concerned with mouse movement when the mouse is over the canvas.  
+
+How is the canvas defined on our page?  Using the <canvas> tag, yes.  But how is it defined?  By using an ID, which in our case is "myCanvas".
+
+Using the "object" "myCanvas" our event listener starts to look like:
+
+    myCanvas.addEventListener( "mousemove", eventFunction , true );    
+
+(3) What function are we going to call when the event occurs
+
+Lets follow the convention where we name the function eventX where X is the type of event.  
+
+So in our case this would be:
+
+    eventMouseMove
+    
+Using the function name  "eventMouseMove" our event listener starts to look like:
+
+    myCanvas.addEventListener( "mousemove", eventMouseMove , true );  
+    
+OK.  All three questions answered so lets go setup our event scaffolding.    
+
+
+2.2.1  Mouse Movement Event - Scaffolding
+---------------------------------------------------------------------------
+
+Lets setup the the basic scaffolding for our event and test that its all hooked up and working.
+
+(A)  Add the event listener
+
+    myCanvas.addEventListener( "mousemove", eventMouseMove , true );    
+
+This should generate a JS error in our console!  Because we have not setup the function yet.
+
+(B)  Add the event function
+
+    function eventMouseMove( e ) {
+
+        console.log( "eventMouseMove()" );
+        
+    }//eventMouseMove
+
+Note, event handler functions all get passed a parameter which is the event object.  We will call that parameter "e" for "event".
+
+Our parameter "e" is an object that has properties and methods associated with the event.  This is where we will find the mouses current location.    
+
+(C) Test it
+
+Save, reload and check the console.
+
+When you move the mouse you should see a console message:
+
+>eventMouseMove()
+
+Ok. Now we are ready to move onto getting the mouse location and seeing how we can use that to change our circle.
+
+2.2.2  Mouse Movement Event - Get the Mouse Coords
+---------------------------------------------------------------------------
+
+With our event scaffolding setup, we are capturing the mouse movement. Now we need to figure out how to, or where to, get access to something defines the mouse location as it moves.
+
+(A) Getting the mouse location
+
+We are looking for something that provides the position of the mouse.  How is a mouse location defined?  I bet its defined as something like its X and Y coords on the screen.
+
+We can look here to see what properties are available to us in the Event Object (scroll down to the "MouseEvent Object" section).
+
+    http://www.w3schools.com/jsref/dom_obj_event.asp
+
+Looks like we can use "clientX" and "clientY".    
+
+Well almost. For the canvas object the mouse coordinates are a bit tricky. So we actually want to use "offsetX" and "offsetY" - these tell us the location of the mouse as "offset" within the canvas.  (Note, this does not work on all browsers - so be sure you are using Chrome.)  
+
+Ok lets try these.  To see what values these produce lets print their values in our console message.  We can reference these values from our "e" object.
+
+    console.log( "mouseMove():" + e.offsetX + ":" +  e.offsetY );
+        
+Save, reload, move the mouse and check the console.  Looks like these provide the X and Y inside out canvas.  Great.
+
+(B) Using the coords to move the circle
+
+Now that we have the mouse X and Y coordinates inside the canvas, what can we do with them?  Or, how can we use them to change the location of the circle?
+
+How is our circle position defined? By the center point of the circle with X and Y coordinates.
+
+Lets use the event mouse X and Y to change circle X and Y.  We can do this by:
+
+    circle.x = e.offsetX;
+    circle.y = e.offsetY;
+
+Add this to our eventMoveMouse function.
+
+Ok great. Nothing happens.  Why?  
+
+By using the offsetX and offsetY we are moving the defined location of the circle X and Y.  
+
+But to see the new defined position we also need to re-draw the circle.  
+
+But where in our algorithm do we draw the circle?
+
+    //draw the the canvas
+    drawCanvas();
+
+Cool.  The circle follows the mouse.
+
+What happens if we clear the canvas before we draw?
+
+    //clear the canvas
+    clearCanvas();
+
+    //draw the circle
+    drawCircle();
+
+Also cool.
+
+2.2.3  Mouse Movement Event - Finished Code
+---------------------------------------------------------------------------
+
+With this exercise we have demonstrated how to:
+
+- add an event listener
+- create an function to handle the event
+
+Final code looks something like:
+
+    //-----------------------------------------------------------
+    // clear canvas
+    function clearCanvas() { 
+        
+        // set a fill style of white
+        context.fillStyle= canvasColor;
+
+        // fill the while canvas with the fill style
+        context.fillRect(0, 0, canvasWidth , canvasHeight);
+
+    } //  clearCanvas()
+    
+    //-----------------------------------------------------------
+    //draw the canvas
+    function drawCanvas() {
+
+        //clear the canvas
+        clearCanvas();
+
+        //draw the circle
+        drawCircle();
+        
+    }//drawCanvas()
+
+    //-----------------------------------------------------------
+    //get the mouse coordinates
+    function eventMouseMove( e ) {
+        
+        console.log( e.offsetX + ":" +  e.offsetY );
+                
+        circle.x = e.offsetX;
+        circle.y = e.offsetY;
+                
+        //draw the circle
+        drawCanvas( );
+        
+    } //eventMouseMove()
+    
+    //-----------------------------------------------------------
+    // Attach an event handler to the document
+    myCanvas.addEventListener( "mousemove", eventMouseMove, true );
+
+
+Our example is a bit simple.  And could use a little cleaning up.  
+
+Lets:
+
+- Move the actual movement of the circle (the changing of the X and Y to a function; in case we need todo other things when we move the circle).
+
+- And instead of drawCircle() we will drawCanvas() when the circle has moved; and have drawCanvas() call clearCanvas() and drawCircle().
+
+    //-----------------------------------------------------------
+    //draw the canvas
+    function drawCanvas() {
+         
+        //clear the canvas
+        clearCanvas();
+        
+        //draw the circle
+        drawCircle();
+        
+    } //drawCanvas()
+    //-----------------------------------------------------------
+
+
+    //-----------------------------------------------------------
+    //move the circle location with the mouse coords
+    function eventMouseMove( e ) {
+
+        //make sure it is listening
+        console.log( "eventMouseMove():" + e.offsetX + ":" +  e.offsetY );
+        
+        //change the location of the circle
+        circle.x = e.offsetX;
+        circle.y = e.offsetY;
+        
+        //re-draw the canvas
+        drawCanvas();
+        
+    }//eventMouseMove
+    //-----------------------------------------------------------
+    
+    //-----------------------------------------------------------
+    //listen for the mouse moving
+    myCanvas.addEventListener( "mousemove", eventMouseMove , true );    
+    //-----------------------------------------------------------
+        
+    //-----------------------------------------------------------
+    // draw the canvas  
+    drawCanvas();
+    //-----------------------------------------------------------
+
+
+---------------------------------------------------------------------------
+3.0  Mouse Events Lab
+---------------------------------------------------------------------------
+
+Lab Assignment: Mouse Events
+
+In this assignment you will extend our move mouse example project to add additional events that change the size and color of the circle.
+
+Start with the Canvas-Events-Mouse-Lab.zip project folder from the Resources->Homework folder on Sakai. 
+
+Review canvas-events-notes.txt and follow and complete section 3.0.
+
+You MUST do all parts:
+
+(1) Have the circle follow the mouse on the Canvas.
+(2) Change the circle color when the mouse is clicked. 
+(3) Modify the circle movement to not draw the circle outside of the canvas.
+
+Grading: You will be scored on the following
+
+6 - Valid HTML, CSS, and JS that follows to best practices
+8 - Proper implementation of the circle movement with in boundaries
+8 - Proper implementation of the circle color change
+8 - Proper implementation of the circle size change
+
+Don’t be afraid to go beyond the basic requirements of the lab if you wish!
+
+Submit a link to your project uploaded on the course server.
+
+3.1  Mouse Events Lab - Circle Follows the Mouse
+---------------------------------------------------------------------------
+
+We did that above.
+
+You need:
+
+(1)  event listener to listen for the mouse movement
+(2)  event hander to 
+    (a) get the x,y position for the mouse
+    (b) change the position of the circle to the position of the mouse
+    (c) draw the canvas (clear + draw circle)
+
+3.2  Mouse Events Lab - Change Circle Color when Mouse is clicked
+---------------------------------------------------------------------------
+
+Similar to the above.
+
+You need:
+
+(1)  event listener to listen for the mouse click
+(2)  event hander to 
+    (a) change the color of the circle 
+    (b) draw the canvas (clear + draw circle)
+
+https://www.w3schools.com/cssref/css_colors_legal.asp
+
+https://www.w3schools.com/jsref/jsref_random.asp
+
+
+    //change the circle color
+    var red = parseInt ( Math.random() * 255 );
+    var green = parseInt ( Math.random() * 255 );
+    var blue = parseInt ( Math.random() * 255 );
+    
+    circle.color = "rgb(" + red + "," + green + "," + blue + ")";
+    
+    //draw the new circle
+    drawCanvas();
+    
+
+
+3.3  Mouse Events Lab - Keep Circle in Canvas Boundaries
+---------------------------------------------------------------------------
+
+    //if at the left border
+    if ( circle.x < circle.size / 2 ) {
+        circle.x = circle.size / 2;
+    }
+
+    //if at the right border
+    if ( circle.x > canvasWidth - circle.size / 2 ) {
+        circle.x = canvasWidth - circle.size / 2
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+

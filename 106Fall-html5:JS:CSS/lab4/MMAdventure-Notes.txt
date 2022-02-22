@@ -1,0 +1,96 @@
+=================================================================
+Multimedia Adventure Example v3.1 2.19.18
+=================================================================
+
+
+<audio autoplay id="story-audio" src=""></audio>
+        
+
+=================================================================
+1.0  Overview
+=================================================================
+
+	Here is the general outline of the project.
+
+
+=================================================================
+2.0  Setup the HTML
+=================================================================
+
+Setup all the components of the HTML Page
+
+	(1) Container
+
+		(2) Title
+
+			<h1 ...
+
+		(3) Story Image
+
+			<img ...
+
+		(4) Story Text
+
+			<p....
+
+		(5) Choice Input
+
+			<button ...
+
+
+		(6) Story Audio
+
+			<audio ....
+
+
+=================================================================
+3.0  Setup the JS
+=================================================================
+
+   (1) Accept input from the page.  And convert it to lowercase.
+
+   		setup a variable to hold the input
+   		assign the variable the input value
+   		convert the input to lower case
+   		write the choice to the console log
+
+   (2) based on the input, build and change the next step in the story 
+
+   		if ( choice == "..." ) {
+
+   			Assign the next step in the story
+
+   			Change the Story Image
+
+   				document.getElementById("...")...
+
+   			Change the Story Audio
+
+   				document.getElementById("...")...
+
+   			Change the story colors
+
+   				document.getElementById("...")...
+
+
+   		} else if ( choice == "..." ) {
+
+   			...same as above...
+   		} else {
+
+   			...same as above with generic ending...
+   		}
+
+    (3) Clear the form input.
+
+    	    document.getElementById('choice-text').value = "";
+
+
+    (4) Write the new story to the page.
+
+    	    document.getElementById("story-text").innerHTML=nextStep;
+
+
+
+
+

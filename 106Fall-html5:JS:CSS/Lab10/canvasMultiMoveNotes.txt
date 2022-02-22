@@ -1,0 +1,300 @@
+Canvas Button Notes v 4.0 4.10.2018
+
+---------------------------------------------------------------------------
+1.0  Canvas Button Project 
+---------------------------------------------------------------------------
+
+For this lab you are going to extent Lab 9.  
+
+
+1.1  Canvas Resources
+---------------------------------------------------------------------------
+
+Here are some resources to help with canvas:
+
+Resources:
+
+Intro to Arrays - http://www.w3schools.com/js/js_arrays.asp
+Array Methods   - https://www.w3schools.com/js/js_array_methods.asp
+For Loops       - https://www.w3schools.com/js/js_loop_for.asp
+
+Event Listener  - https://www.w3schools.com/js/js_htmldom_eventlistener.asp
+Events           - https://www.w3schools.com/jsref/dom_obj_event.asp
+
+
+Tutorials:
+
+http://www.w3schools.com/canvas/
+
+https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial
+
+
+---------------------------------------------------------------------------
+2.0  Code Structure and Logic
+---------------------------------------------------------------------------
+
+2.1 The HTML
+---------------------------------------------------------------------------
+
+This page has:
+
+    * HTML background color
+    * Canvas centered on the page with a top margin
+    * Canvas tag using shadows on the borders
+    * A div to place and center buttons
+    * A hidden fontFix div to use fonts on the canvas
+
+
+2.2 The CSS
+---------------------------------------------------------------------------
+
+The CSS is also very straight forward.
+
+    * Font:
+    - import a font
+
+    * Body:
+    - use a bg color that covers the whole page
+
+    * Canvas:
+    - add a simple 1px border to frame the canvas
+    - add a top margin to help present the canvas
+    - add a shadow for presentation
+
+    * Font Fix for Canvas:
+    - setup an ID to use fonts
+    - setup a few helper classes to use the fonts
+
+    * Utility class:
+    - center text
+    - center objects
+
+
+2.3 The JS
+---------------------------------------------------------------------------
+
+Has all the standard setup code to call our canvasApp().
+
+The canvasApp() has the following basic algorithm from Lab 8:
+
+    (1) set up canvas variables
+    
+    (2) utility function getRandom( min, max )
+
+    (3) circle variables
+        - control variables for size; color; movement
+        - object that defines the circle
+
+    (4) circle utility functions
+        - a start of a function to create a circle 
+        - function to draw a circle
+        - function to move a circle
+
+    (5) canvas utility functions
+        - function to clear the canvas
+
+    (6) control loop functions
+        - function to draw the canvas
+            - clear canvas
+            - move objects
+            - draw objects
+            
+    (7) setup section that then calls the control loop
+        - clear the canvas
+
+        - set an interval
+        - call drawCanvas() at the interval to make things move
+    
+---------------------------------------------------------------------------
+3.0  Lab Requirements and Steps
+---------------------------------------------------------------------------
+
+Getting Started:
+----------------
+
+Review these notes in detail.
+Repeat.
+
+Assignment:
+-----------
+
+You MUST add all these ALL parts:
+
+(1) add a button that when clicked ADD a new circle with random values
+(2) add a button that when clicked REMOVE a circle
+(3) add a button that when clicked regenerates new random values for ALL the existing circles
+
+
+To accomplish this here are some recommended steps:
+
+Step 1: Use an array to hold multiple circle objects
+-------
+
+(1) Create a new array to hold all the circles
+
+(2) Create a new function addCircle() to:
+- generate a new random circle and 
+-add itself to the array of circles
+
+(3) Find a place to call the addCircle()
+
+(4) Change the control loop logic to move and draw each of the circles in the new circles array
+
+
+Step 2: Add 3 Buttons that when clicked Add, Remove, and Change circle's
+-------
+
+(5) Add an event handler to listen for the "click" on a button and then add a new circle 
+- add a button in HTML with an ID
+- add event listener for when this button is clicked
+- add event handler that then calls a function that adds a new circle (you already have this function)
+
+(6) Add an event handler to listen for the "click" on a button and then remove a circle
+- add a button in HTML with an ID
+- add event listener for when this button is clicked
+- add event handler that then calls a function that adds a new circle (you need to create this new function)
+
+(7) Add an event handler to listen for the "click" on a button and then re-randomizes all the existing circle's
+- add a button in HTML with an ID
+- add event listener for when this button is clicked
+- add event handler that then calls a function that changes all the random values of all the existing circle's (you need to create this new function)
+
+
+---------------------------------------------------------------------------
+4.0  Steps
+---------------------------------------------------------------------------
+
+
+4.1  Array to hold the circles
+---------------------------------------------------------------------------
+
+In the variable section add a variable
+
+    var circles = [];  
+
+
+4.2  New function to generate circles and add them to the array
+---------------------------------------------------------------------------
+
+This function will: 
+
+    (1) create the next values for our circle
+    (2) create a new circle object with these new values
+    (3) and this new circle object to our circles array
+
+Here is a start to this function with a part that provides an example of how to add new starting X and Y values.  You will need to fill in the rest for movement and color:
+
+   function addCircle( ) {
+    
+        //(1) Setup the next circle values
+        
+            // get a next size
+
+            // set the starting position
+
+            // get a color:  red, green, blue, opacity
+
+            // get the next speed
+
+        // (2) define a new circle object
+        
+        // (3) push the new circle object onto the circles array
+                
+    } //addCircle()
+    //-----------------------------------------------------------
+
+
+4.3 Where to call addCircle()
+---------------------------------------------------------------------------
+
+Now you need to find a place to call addCircle().  Where? 
+
+
+4.4  Change logic to move and draw each of the circles in the new circles array
+---------------------------------------------------------------------------
+
+Now you need to modify how you call moveCircle() and drawCircle() to work with each element in your circles array: 
+
+(1) add a for loop 
+
+    for ( var i = 0; i < number of elements on the circles array; i++ ) {
+
+        ...move each circle...
+        ...draw each circle...
+
+    } // for 
+
+(2) reference an individual circle in the array based on the loop index
+
+    circles[ i ];
+
+
+4.5 Add a button that adds a new circle when this button is clicked
+---------------------------------------------------------------------------
+
+(1) add the button in the HTML file
+    - give it an ID
+
+(2) add an event listener
+    - what are we listening on?
+    - what are we listening for?
+    - what function do we call when the event occurs?
+
+    Resource:   https://www.w3schools.com/js/js_htmldom_eventlistener.asp
+    Resource:   https://www.w3schools.com/jsref/dom_obj_event.asp
+
+    Example:    element.addEventListener( event, function );
+
+(3) add an event handler that then calls a function that adds a new circle
+
+Hint:  you already have a function the adds a circle to the array
+
+
+4.6 Add a button that removes a new circle when this button is clicked
+---------------------------------------------------------------------------
+
+Steps:
+
+(1) add the button in the HTML file
+    - give it an ID
+
+
+(2) add an event listener
+    - what are we listening on?
+    - what are we listening for?
+    - what function do we call when the event occurs?
+
+
+(3) add an event handler that then calls a function that removes a circle
+
+Hints:  
+
+- the first two sets are the same as the add a circle button
+- you need to create a new function that removes a circle to the array
+    - what array method do you use to remove an element from an array?
+
+
+4.7 Add a button that re-randomizes each circle when this button is clicked
+---------------------------------------------------------------------------
+
+Steps:
+
+(1) add the button in the HTML file
+    - give it an ID
+
+
+(2) add an event listener
+    - what are we listening on?
+    - what are we listening for?
+    - what function do we call when the event occurs?
+
+
+(3) add an event handler that then calls a function that removes a circle.
+
+
+Hints:  
+
+- you need to create a new function that re-randomizes each circle in the array
+- you can step through the array with a for loop
+- you already have functions to add and remove single circles to and from the array
+

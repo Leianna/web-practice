@@ -1,0 +1,298 @@
+interactionOne - Developer Notes (v1.3 2.7.2018)
+
+----------------------------------------------------------
+1.0 Introduction
+----------------------------------------------------------
+
+In this example project we will practice using:
+
+    - get input from a division of the HTML page
+    - interpret this input in JS and build a message 
+    - write this message to a division on the HTML page
+
+1.1  Setup
+----------------------------------------------------------
+
+- Review the project setup
+
+
+1.2  Using the JS Console
+----------------------------------------------------------
+
+- Opening the console log
+
+    View->Developer->Javascript Console
+
+- Writing to the console log:
+
+    console.log( "I just wrote to the javascript console!" );
+
+
+----------------------------------------------------------
+2.0  Setup an HTML Page into Sections 
+----------------------------------------------------------
+
+We need to setup our HTML page to have sections, or <div>'s, for:
+
+    - title
+    - input section where will use and HTML form with a button
+    - output section to write our response
+
+2.1 Setting up sections with the <div> tag
+----------------------------------------------------------
+
+To split our page into sections we use the <div> tag.
+
+This allows us the group sections of our page together; so that we can more easily access it in our JS.
+
+    <div>
+        ...put input stuff here...
+        or
+        ...put output stuff here..
+    </div>
+
+2.2 Using the ID attribute to name sections
+----------------------------------------------------------
+Resource:  https://www.w3schools.com/tags/att_global_id.asp
+
+When we want to easily reference an element on our HTML page in JS we use the ID attribute to give it name so that we can then access with that ID.
+
+We can do this for any HTML tag.
+
+    <div id="inputArea">
+        ...input tags...
+    </div>
+
+Or with specific elements like: 
+
+    a <p> tag:
+
+        <p id="intoMessage">...</p>
+
+    or a an image tag:
+
+        <img id="featureImage" src="..." alt="...">
+
+or any element on the page that we want to access directly.
+
+
+----------------------------------------------------------
+3.0  Accessing ID's on an HTML Page in JS
+----------------------------------------------------------
+Resource:  https://www.w3schools.com/jsref/met_document_getelementbyid.asp
+
+To access these elements by their ID name in JS we use the:
+
+    document.getElementById("...id name...")
+
+Or in our example of using a div:
+
+    HTML looks like:
+
+        <div id="outputArea">
+            ...output tags...
+        </div>
+
+    and then the JS can look like:
+
+        document.getElementById("outputArea").innerHTML = "...some new output string";
+
+3.1  Change an HTML id element's HTML in JS
+----------------------------------------------------------
+
+As we have seen, we can change HTML (and CSS) of an HTML.  By using the id attribute in HTML tags we can now change specific sections of pages.
+
+Here is an simple example:
+
+    HTML:
+
+    <!-- Header Message -->
+    <h1 id="headerMessage">How are you?</h1>
+    <button type="button" onclick="doIt()">Respond</button>
+
+    JS using a function:
+
+    function doIt() {
+        
+        document.getElementById("headerMessage").innerHTML = "I am a awesome! This COMP 106 stuff is super cool.";
+
+    } //doIt()
+
+----------------------------------------------------------
+4.0  Setup interactionOne 
+----------------------------------------------------------
+
+Now lets setup a page that has:
+
+    - title section
+    - input section
+    - response section
+
+First lets get rid of whatever is on our page.
+
+Now lets build each of these sections 
+
+
+4.1  Title or Intro Section
+----------------------------------------------------------
+
+We want to want frame our interaction with some basic intro.
+
+    - a header
+    - a brief message
+
+We do not plan to change this section so it does need ID's
+
+Example:
+
+    <!-- ------------------------------------------ -->
+    <!-- Intro Message -->
+    <h1 class="center-text">interactionOne</h1>
+    <p class="center-text">Enter some input and get a response.</p>
+
+
+4.2  Input Section
+----------------------------------------------------------
+
+Lets make a section or <div> of the page where we can put tags to capture input.
+
+We are going to use an HTML form for this - but more on that later.
+
+For now lets just create the section.
+
+    <!-- ------------------------------------------ -->
+    <!-- Input Area -->
+    <div id="inputArea">
+        <p>input will go here</p>
+    </div>
+
+You will notice a bunch of fancy styling in this.  That is in the CSS.  More on this later.
+
+4.3  Response Section
+----------------------------------------------------------
+
+Lets do the same thing for an output section.
+
+    <!-- ------------------------------------------ -->
+    <!-- Response Area -->
+    <div id="responseArea">
+        <p>output will go here</p>
+    </div>
+
+Again, you will notice a bunch of fancy styling in this.  That is in the CSS.  More on this later.
+
+
+----------------------------------------------------------
+5.0  Using HTML forms to get input
+----------------------------------------------------------
+Resource:  https://www.w3schools.com/html/html_forms.asp
+
+Now we need to figure our how to get input.
+
+To do that we will use an HTML form.  See the resource link above.
+
+The HTML form has a few parts:
+
+    open form
+
+        the inputs
+
+        a button to sent the inputs to our JS function
+
+    close form
+    
+5.1  HTML form input's
+----------------------------------------------------------
+Resource:  https://www.w3schools.com/html/html_form_input_types.asp
+
+There are lots of types of inputs - see the resource above for details.
+
+For now we are simply going to get input of type text.
+
+The <input> tag has these parts:
+
+      <input type="text"            name="variableName"><br>
+
+it has:      a type of input        a variable name to put the input value
+
+We can then use the name to access this input in our JS.
+
+Lets create a form and add a simple input:
+
+Example:
+
+        <form>
+
+            <input type="text" name="inputOne">                                
+
+        </form>
+
+
+5.2  Passing the form HTML input's to a JS function
+----------------------------------------------------------
+
+Now that we can get input we need to be to sent it to a JS function.
+
+To do this we use a button.
+
+And with this button when we call our JS function we will pass in a parameter which contains all the forms values.
+
+        <button type="button" onclick="doIt( this.form )">Try it!</button>
+
+Lets add this our form.
+
+
+5.3 Using JS to process HTML form inputs
+----------------------------------------------------------
+
+We see that our button calls our JS function with a parameter of the forms values:
+
+    doIt( this.form )
+
+So lets setup our JS function to accept this and process the input.
+
+1.  add the parameter to our function
+
+function doIt( inputs ) {
+        
+        console.log("doit()");
+    
+} //do it
+
+2.  get access to the forms input variables.
+
+    paramerter.variablename.value
+
+    Example:
+
+    inputs.inputOne.value
+
+    Example to just write the input to the console:
+
+        Change our function to include:
+
+            var response;
+
+            response = inputs.inputOne.value;
+
+            console.log( response );
+
+3.  Now lets change the function to write to the response area:
+
+        document.getElementById("responseArea").innerHTML = response;
+
+
+6.0  Madlib Assignment
+----------------------------------------------------------
+
+OK - now build me a Madlib.
+
+Step 1:  Write the Madlib in a doc.
+
+Step 2:  Start to code it in class on Mon.
+
+
+
+
+
+
